@@ -1,0 +1,94 @@
+CachedReader implements AbstractReader
+{
+    public function loadObjectsUsingIds(array $ids)
+    {
+        // load objects via cache reader
+        // for each $id in $ids
+        //      if the DataClass does not show $id as loaded
+        //          attempt to load $id object from non-cached reader
+        //          if $id object loaded
+        //              write object to cache
+    }
+
+    public function getTotalObjectCount()
+    {
+        $this->getCacheReader()->getTotalObjectCount();
+    }
+
+    public function loadAllObjects()
+    {
+        $this->getCacheReader()->loadAllObjects();
+    }
+
+    public function getTotalObjectCountUsingFilter(MXT_DO_AbstractFilter $filter)
+    {
+        $this->getCacheReader()->getTotalObjectCountUsingFilter($filter);
+    }
+
+    public function getAllObjectsUsingFilter(MXT_DO_AbstractFilter $filter)
+    {
+        $this->getCacheReader()->getAllObjectsUsingFilter($filter);
+    }
+
+
+    public function getReader()
+    {
+        if(is_null($this->reader))
+            $this->reader = $this->getDefaultReader();
+
+        return $this->reader;
+    }
+
+    public function getCacheReader()
+    {
+        if(is_null($this->cacheReader))
+            $this->cacheReader = $this->getDefaultCacheReader();
+
+        return $this->cacheReader;
+    }
+
+    public function getCacheWriter()
+    {
+        if(is_null($this->cacheWriter))
+            $this->cacheWriter = $this->getDefaultCacheWriter();
+
+        return $this->cacheReader;
+    }
+
+
+    protected abstract function getDefaultReader();
+
+    protected abstract function getDefaultCacheReader();
+    protected abstract function getDefaultCacheWriter();
+}
+
+
+DatabaseCachedReader extends CachedReader
+{
+    protected abstract function getDefaultReader();
+
+    protected function getDefaultCacheReader()
+    {
+        return new MXT_DO_DatabaseReader($class, $dbHandler);
+    }
+}
+
+DatabaseCachedDataClassReader extends DatabaseCachedReader
+{
+    protected abstract function getDefaultReader();
+
+    protected function getDefaultCacheReader()
+    {
+        return new MXT_DO_DatabaseReader($class, $class);
+    }
+}
+
+
+DatabaseCachedDataClass extends MXT_AbstractDatabaseDataClass
+{
+    protected function getDefaultReader()
+    {
+        return new MXT_DO_DatabaseCachedDataClassReader($this);
+    }
+}
+
