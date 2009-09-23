@@ -10,8 +10,11 @@ class MXT_ContentCache
     protected $cacheRoot;
 
 
-    public function __construct($cacheRoot)
+    public function __construct($cacheRoot = null)
     {
+        if(is_null($cacheRoot)) 
+            $cacheRoot = PATH_LIB . 'etc/cache';
+        
         $this->setCacheRoot($cacheRoot);
     }
 
