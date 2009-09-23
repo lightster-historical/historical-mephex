@@ -1,7 +1,10 @@
 <?php
 
 
-class ConnectionException extends Exception
+require_once PATH_LIB . 'com/mephex/core/Exception.php';
+
+
+class ConnectionException extends MXT_Exception
 {
     public function __construct($message)
     {

@@ -1,7 +1,10 @@
 <?php
 
 
-class QueryException extends Exception
+require_once PATH_LIB . 'com/mephex/core/Exception.php';
+
+
+class QueryException extends MXT_Exception
 {
     public function __construct($message, $query)
     {
