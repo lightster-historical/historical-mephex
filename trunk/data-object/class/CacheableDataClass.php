@@ -24,7 +24,7 @@ abstract class MXT_CacheableDataClass extends MXT_DataClass implements MXT_Cache
 
     protected function initFields()
     {
-        $cache = new MXT_ContentCache(PATH_LIB);
+        $cache = new MXT_ContentCache();
 
         $fields = new MXT_DO_Fields($this);
 
@@ -91,7 +91,7 @@ abstract class MXT_CacheableDataClass extends MXT_DataClass implements MXT_Cache
 
     public function getDirectory()
     {
-        return 'com/mephex/data-object/class/cache/';
+        return 'com/mephex/data-object/class';
     }
 
     public function getFileName()
