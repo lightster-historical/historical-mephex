@@ -101,7 +101,7 @@ class MxSmtpMail
 
         if(PEAR::isError($return))
         {
-            echo 'there was an error with Mail::factory()';
+            echo 'there was an error with Mail::send()';
             print_r($return);
             exit;
         }
