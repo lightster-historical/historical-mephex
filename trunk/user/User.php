@@ -281,9 +281,13 @@ class User
         return md5($password . $this->securityHash) == $this->password;
     }
 
-    public function getTimeZone()
+    public function getTimezone()
     {
         return $this->timeZone;
+    }
+    
+    public function getLanguage() {
+        return 'en-us';
     }
 
 
