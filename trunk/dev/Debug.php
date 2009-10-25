@@ -7,7 +7,9 @@ require_once PATH_LIB . 'com/mephex/dev/Log.php';
 class MXT_Debug
 {
     protected static $logPassword = null;
+    
     protected static $showLog = array();
+    protected static $showAllLogs = false;
 
 
     public static function logException($logName, Exception $ex)
@@ -31,7 +33,7 @@ class MXT_Debug
     public static function output($logName, $message, $title = null)
     {
         // show messages?
-        if( true || (array_key_exists($logName, self::$showLog) && self::$showLog[$logName]))
+        if(array_key_exists($logName, self::$showLog) && (self::$showLog[$logName] || self::$showAllLogs))
         {
             if($message instanceof Exception)
             {

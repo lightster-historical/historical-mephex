@@ -42,7 +42,7 @@ class HttpResponder
     }
 
 
-    public function checkPermissions()
+    protected function checkPermissions()
     {
     }
 
